@@ -8,4 +8,4 @@ sleep 2
 
 echo "Starting Cloudflare Tunnel..."
 cd ..
-./cloudflared/cloudflared.exe tunnel --url http://localhost:8000
+./cloudflared/cloudflared tunnel --url http://localhost:8000
